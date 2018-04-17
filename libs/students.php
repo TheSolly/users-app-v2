@@ -1,6 +1,6 @@
 <?php
 
-$tableName = 'users';
+$tableName = 'students';
 
 function getAll()
 {
@@ -31,15 +31,16 @@ function getById($id)
 	}
 }
 
-function insert($full_name, $username, $password)
+function insert($full_name, $username, $email, $password)
 {
 	global $dbh;
 	global $tableName;
-	$sql = "INSERT INTO $tableName (`username`,`full_name`, `password`) VALUES (:username, :full_name, :password)";
+	$sql = "INSERT INTO $tableName (`username`,`full_name`,`email`,`password`) VALUES (:username, :full_name, :email, :password)";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":username" => $username,
 		":full_name" => $full_name,
+		":email" => $email,
 		":password" => md5($password)
 	];
 	if ($stm->execute($data)) {
@@ -66,18 +67,19 @@ function deletebyId($id)
 
 }
 
-function update($id, $username, $full_name, $password)
+function update($id, $username, $full_name, $email, $password)
 {
 	global $dbh;
 	global $tableName;
 	$sql = "UPDATE $tableName 
-			SET id = ':id', username = :username, full_name = :full_name, password = :password 
+			SET id = ':id', username = ':username', full_name =  :full_name , email =  :email , password = :password 
 			WHERE id = $id";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":id" => $id,
 		":username" => $username,
 		":full_name" => $full_name,
+		":email" => $email,
 		":password" => md5($password)
 	];
 	if ($stm->execute($data)) {

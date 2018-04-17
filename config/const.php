@@ -31,6 +31,14 @@ define('TEMP_PATH', APP_PATH . "templates" . DS);
 define('LAYOUTS_PATH', TEMP_PATH . "layout" . DS);
 
 
+// Admin Dir Paths
+
+define('ADMIN_PATH', APP_PATH ."admin" .  DS);
+define('TEMP_ADMIN_PATH', ADMIN_PATH . "templates" . DS);
+define('LAYOUTS_ADMIN_PATH', TEMP_ADMIN_PATH . "layout" . DS);
+
+
+
 // Main URLs
 
 define('BASE_URL', "HTTP://" . $_SERVER['HTTP_HOST'] . "/");
@@ -39,6 +47,11 @@ define('JS_DIR', BASE_URL . "templates/js" . "/");
 define('IMG_DIR', BASE_URL . "templates/images" . "/");
 
 
+
+// Admin URLs
+define('ADMIN_URL', BASE_URL . "admin" . "/");
+define('CSS_ADMIN_URL', ADMIN_URL . "templates/css" . "/");
+define('JS_ADMIN_DIR', ADMIN_URL . "templates/js" . "/");
 
 
 

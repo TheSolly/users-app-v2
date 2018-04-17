@@ -8,12 +8,12 @@ if (isset($_GET['delete'])) {
   }
   else {
     $id = $_GET['delete'];
-    deleteUserbyId($id);
+    deletebyId($id);
     exit(header("location:index.php"));
   }
 }
 
-$userList = getAllUsers();
+$userList = getAll();
 
 
 _header(APP_NAME);
