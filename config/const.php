@@ -2,7 +2,7 @@
 
 // APP Name
 
-define('APP_NAME', 'APP');
+define('APP_NAME', 'APP2');
 
 
 // Database Connection 
