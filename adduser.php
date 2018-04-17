@@ -1,5 +1,5 @@
 <?php 
-require_once 'templates/layout/header.tpl'; 
+require_once 'config/config.php';
 
 if (isset($_POST['username'],$_POST['full_name'],$_POST['password'],$_POST['re-password'])) {
 	$username = $_POST['username'];
@@ -17,6 +17,8 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['password'],$_POST['re-p
 		echo "Failed";
 	}
 }
+
+_header(APP_NAME);
 ?>
 
 
@@ -50,16 +52,4 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['password'],$_POST['re-p
 		</form>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-<?php require_once 'templates/layout/footer.tpl'; ?>
+<?php _footer(); ?>

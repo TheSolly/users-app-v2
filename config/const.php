@@ -51,4 +51,3 @@ define('IMG_DIR', BASE_URL . "templates/images" . "/");
 
 
 
- ?>

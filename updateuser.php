@@ -1,5 +1,5 @@
 <?php 
-require_once 'templates/layout/header.tpl';
+require_once 'config/config.php';
 
 if (isset($_GET['user_id'])) {
 	$user = getUserById($_GET['user_id']);
@@ -24,6 +24,8 @@ if (isset($_GET['user_id'])) {
 		exit();
 	}
 }
+
+_header(APP_NAME);
 ?>
 
 <div class="row">
@@ -61,4 +63,4 @@ if (isset($_GET['user_id'])) {
 	</div>
 </div>
 
-<?php require_once 'templates/layout/footer.tpl'; ?>
+<?php _footer(); ?>

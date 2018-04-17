@@ -3,7 +3,7 @@
 
 function _header($pageName)
 { 
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +20,7 @@ function _header($pageName)
 }
 function _footer()
 {
-?>
+ ?>
 
 </div>
 
