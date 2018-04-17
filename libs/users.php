@@ -1,12 +1,12 @@
 <?php
 
-$tableName = 'users';
+$tableNameUser = 'users';
 
-function getAll()
+function getAllUsers()
 {
 	global $dbh;
-	global $tableName;
-	$sql = "SELECT * FROM $tableName";
+	global $tableNameUser;
+	$sql = "SELECT * FROM $tableNameUser";
 	$stm = $dbh->prepare($sql);
 	if ($stm->execute()) {
 		return $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -15,11 +15,11 @@ function getAll()
 	}
 }
 
-function getById($id)
+function getUserById($id)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "SELECT * FROM $tableName WHERE id=:id";
+	global $tableNameUser;
+	$sql = "SELECT * FROM $tableNameUser WHERE id=:id";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":id"=>$id
@@ -31,11 +31,11 @@ function getById($id)
 	}
 }
 
-function insert($full_name, $username, $password)
+function insertUser($full_name, $username, $password)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "INSERT INTO $tableName (`username`,`full_name`, `password`) VALUES (:username, :full_name, :password)";
+	global $tableNameUser;
+	$sql = "INSERT INTO $tableNameUser (`username`,`full_name`, `password`) VALUES (:username, :full_name, :password)";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":username" => $username,
@@ -49,11 +49,11 @@ function insert($full_name, $username, $password)
 	}
 }
 
-function deletebyId($id)
+function deleteUserbyId($id)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "DELETE FROM $tableName WHERE id=:id";
+	global $tableNameUser;
+	$sql = "DELETE FROM $tableNameUser WHERE id=:id";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":id"=>$id
@@ -66,16 +66,15 @@ function deletebyId($id)
 
 }
 
-function update($id, $username, $full_name, $password)
+function updateUser($id, $username, $full_name, $password)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "UPDATE $tableName 
-			SET id = ':id', username = :username, full_name = :full_name, password = :password 
+	global $tableNameUser;
+	$sql = "UPDATE $tableNameUser 
+			SET username = :username, full_name = :full_name, password = :password 
 			WHERE id = $id";
 	$stm = $dbh->prepare($sql);
 	$data = [
-		":id" => $id,
 		":username" => $username,
 		":full_name" => $full_name,
 		":password" => md5($password)

@@ -1,41 +1,41 @@
 <?php
 
-$tableName = 'students';
+$tableNameStudents = 'students';
 
-function getAll()
+function getAllStudents()
 {
 	global $dbh;
-	global $tableName;
-	$sql = "SELECT * FROM $tableName";
+	global $tableNameStudents;
+	$sql = "SELECT * FROM $tableNameStudents";
 	$stm = $dbh->prepare($sql);
 	if ($stm->execute()) {
-		return $stm->fetchAll(PDO::FETCH_ASSOC);
+		return $stm->fetchAll();
 	} else {
 		return false;
 	}
 }
 
-function getById($id)
+function getStudentById($id)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "SELECT * FROM $tableName WHERE id=:id";
+	global $tableNameStudents;
+	$sql = "SELECT * FROM $tableNameStudents WHERE id=:id";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":id"=>$id
 	];
 	if ($stm->execute($data)) {
-		return $stm->fetch(PDO::FETCH_ASSOC);
+		return $stm->fetch();
 	} else {
 		return false;
 	}
 }
 
-function insert($full_name, $username, $email, $password)
+function insertStudent($full_name, $username, $email, $password)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "INSERT INTO $tableName (`username`,`full_name`,`email`,`password`) VALUES (:username, :full_name, :email, :password)";
+	global $tableNameStudents;
+	$sql = "INSERT INTO $tableNameStudents (`username`,`full_name`,`email`,`password`) VALUES (:username, :full_name, :email, :password)";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":username" => $username,
@@ -50,11 +50,11 @@ function insert($full_name, $username, $email, $password)
 	}
 }
 
-function deletebyId($id)
+function deleteStudentbyId($id)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "DELETE FROM $tableName WHERE id=:id";
+	global $tableNameStudents;
+	$sql = "DELETE FROM $tableNameStudents WHERE id=:id";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":id"=>$id
@@ -67,11 +67,11 @@ function deletebyId($id)
 
 }
 
-function update($id, $username, $full_name, $email, $password)
+function updateStudent($id, $username, $full_name, $email, $password)
 {
 	global $dbh;
-	global $tableName;
-	$sql = "UPDATE $tableName 
+	global $tableNameStudents;
+	$sql = "UPDATE $tableNameStudents 
 			SET id = ':id', username = ':username', full_name =  :full_name , email =  :email , password = :password 
 			WHERE id = $id";
 	$stm = $dbh->prepare($sql);
@@ -84,6 +84,25 @@ function update($id, $username, $full_name, $email, $password)
 	];
 	if ($stm->execute($data)) {
 		return true;
+	} else {
+		return false;
+	}
+}
+
+
+function login($username, $password)
+{
+	global $dbh;
+	global $tableNameStudents;
+	$sql = "SELECT full_name, id, username FROM $tableNameStudents 
+            WHERE username=:username AND password=:password";
+    $stm = $dbh->prepare($sql);
+    $data = [
+		":username" => $username,
+		":password" => md5($password)
+	];
+	if ($stm->execute($data)) {
+		return $stm->fetch();
 	} else {
 		return false;
 	}

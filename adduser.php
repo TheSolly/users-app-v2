@@ -7,7 +7,7 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['password'],$_POST['re-p
 	$password = $_POST['password'];
 	$re_password = $_POST['re-password'];
 	
-	if (insert($full_name, $username, $password)) {
+	if (insertUser($full_name, $username, $password)) {
 		?> <script type="text/javascript">
 			var full_name = "<?php echo $full_name; ?>";
 			alert(full_name + " " +"Has been added successfully");

@@ -2,7 +2,7 @@
 require_once 'config/config.php';
 
 if (isset($_GET['user_id'])) {
-	$user = getById($_GET['user_id']);
+	$user = getUserById($_GET['user_id']);
 }else {
 	if (isset($_POST['id'],$_POST['username'],$_POST['full_name'],$_POST['password'],$_POST['re-password'])) {
 		$id = $_POST['id'];
@@ -10,8 +10,8 @@ if (isset($_GET['user_id'])) {
 		$full_name = $_POST['full_name'];
 		$password = $_POST['password'];
 		$re_password = $_POST['re-password'];
-		update($id, $username, $full_name, $password);
-		$user = getById($_POST['id']);
+		updateUser($id, $username, $full_name, $password);
+		$user = getUserById($_POST['id']);
 ?>
 		<script type="text/javascript">
 			var full_name = "<?php echo $full_name; ?>";
