@@ -1,5 +1,8 @@
 <?php 
-require_once 'templates/layout/header.tpl'; ?>
+require_once 'config/config.php'; 
+
+_header(APP_NAME);
+ ?>
 
 
 <div class="row">
@@ -13,4 +16,4 @@ require_once 'templates/layout/header.tpl'; ?>
 	</div>
 </div>
 
-<?php require_once 'templates/layout/footer.tpl'; ?>
+<?php _footer(APP_NAME); ?>
