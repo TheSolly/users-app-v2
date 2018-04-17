@@ -107,3 +107,5 @@ function login($username, $password)
 		return false;
 	}
 }
+
+getStudentById(0);

@@ -5,7 +5,6 @@ require_once '../config/config.php';
 if (isset($_SESSION['user'])) {
 	exit(header("Location:" . ADMIN_URL));
 }
-
 if (isset($_POST['username'], $_POST['password'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];

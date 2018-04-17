@@ -1,10 +1,11 @@
 <?php 
 require_once '../config/config.php';
 
-
+session_start();
 if (!isset($_SESSION['user'])) {
-	exit(header("Location:" . ADMIN_URL . "login.php"));
+    exit(header("Location:" . ADMIN_URL . "login.php"));
 }
+
 
 
 _header_admin(APP_NAME);
