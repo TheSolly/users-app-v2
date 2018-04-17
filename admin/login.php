@@ -9,13 +9,21 @@ if (isset($_SESSION['user'])) {
 if (isset($_POST['username'], $_POST['password'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	if (login($username, $password)) {
+	if ($user = login($username, $password)) {
 		session_start();
 		$_SESSION['user'] = $user;
-		exit(header("Location:" . ADMIN_URL));
+		?> <script type="text/javascript">
+			var username = "<?php echo $username; ?>";
+			alert(username + " " +"logged in successfully");
+			window.location.href = "index.php";
+			</script>
+		<?php
 	}
 	else {
-		echo "error";
+		?> <script type="text/javascript">
+			alert("Wrong username or password!");
+			</script>
+		<?php
 	}
 }
 

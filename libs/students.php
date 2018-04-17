@@ -99,7 +99,7 @@ function login($username, $password)
     $stm = $dbh->prepare($sql);
     $data = [
 		":username" => $username,
-		":password" => md5($password)
+		":password" => $password
 	];
 	if ($stm->execute($data)) {
 		return $stm->fetch();
