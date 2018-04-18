@@ -20,6 +20,12 @@ $options = [
 	PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
 
+// Users Type
+define('ADMINS', 1);
+define('STUDENTS', 2);
+define('TEACHERS', 3);
+
+
 // Main Dir Paths
 
 define('DS', DIRECTORY_SEPARATOR);

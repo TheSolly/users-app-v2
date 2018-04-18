@@ -14,26 +14,26 @@ if (isset($_GET['delete'])) {
 }
 
 if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['password'],$_POST['re_password'])) {
-  $username = $_POST['username'];
-  $full_name = $_POST['full_name'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  $re_password = $_POST['re_password'];
-  $type = ADMINS;
+	$username = $_POST['username'];
+	$full_name = $_POST['full_name'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$re_password = $_POST['re_password'];
+	$type = TEACHERS;
 
-  if (isset($_POST['id'])) {
-    $id = $_POST['id'];
-    updateUser($id, $username, $full_name, $email, $password);
-    header("location:admins.php");
-      exit();
-  }
-  else {
-    insertUser($username, $full_name, $email, $password, $type);
-  }
-  
+	if (isset($_POST['id'])) {
+		$id = $_POST['id'];
+		updateUser($id, $username, $full_name, $email, $password);
+		header("location:admins.php");
+	    exit();
+	}
+	else {
+		insertUser($username, $full_name, $email, $password, $type);
+	}
+	
 }
 
-$userList = getUserByType(ADMINS);
+$userList = getUserByType(TEACHERS);
 
  ?>
 
@@ -285,9 +285,9 @@ $userList = getUserByType(ADMINS);
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="admins.php"> <span>Admins</span></a></li>
+                <li><a href="admins.php"> <span>Admins</span></a></li>
                 <li><a href="students.php"> <span>Students</span></a></li>
-                <li><a href="teachers.php"> <span>Teachers</span></a></li>
+                <li class="active"><a href="teachers.php"> <span>Teachers</span></a></li>
               </ul>
             </li>
           </ul>
@@ -319,45 +319,45 @@ $userList = getUserByType(ADMINS);
                 </div>
                 <div class="row">
                   <div class="col-xs-8 col-xs-offset-2">
-                    <?php
+                  	<?php
                         if (isset($_GET['edit'])){
                             $user = getUserById($_GET['edit']);
                     ?>
-                      <form action="" method="post">
-                        <div class="form-text bg-success text-white text-center font-weight-bold rounded">Update User</div>
-                        <div class="form-group">
-                          <input type="hidden" name="id" class="form-control" value="<?php echo $user['id'] ?>">
-                        </div>
-                        <div class="form-group">
-                          <label>Full Name</label>
-                          <input type="text" name="full_name" class="form-control" value="<?php echo $user['full_name']?>">
-                        </div>
-                        <div class="form-group">
-                          <label>Username</label>
-                          <input type="text" name="username" class="form-control" value="<?php echo $user['username']?>">
-                        </div>
-                        <div class="form-group">
-                          <label>Email</label>
-                          <input type="email" name="email" class="form-control" value="<?php echo $user['email']?>">
-                        </div>
-                        <div class="form-group">
-                          <label>Password</label>
-                          <input type="password" name="password" class="form-control" value="">
-                        </div>
-                        <div class="form-group">
-                          <label>Re-enter Password</label>
-                          <input type="password" name="re_password" class="form-control" value="">
-                        </div>
-                        <div class="form-group">
-                          <button class="btn btn-success btn-block font-weight-bold" type="submit">Save</button>
-                        </div>
-                      </form>
-                    <?php
+    	              	<form action="" method="post">
+    	              		<div class="form-text bg-success text-white text-center font-weight-bold rounded">Update User</div>
+    	              		<div class="form-group">
+    	              			<input type="hidden" name="id" class="form-control" value="<?php echo $user['id'] ?>">
+    	              		</div>
+    	              		<div class="form-group">
+    	              			<label>Full Name</label>
+    	              			<input type="text" name="full_name" class="form-control" value="<?php echo $user['full_name']?>">
+    	              		</div>
+    	              		<div class="form-group">
+    	              			<label>Username</label>
+    	              			<input type="text" name="username" class="form-control" value="<?php echo $user['username']?>">
+    	              		</div>
+    	              		<div class="form-group">
+    	              			<label>Email</label>
+    	              			<input type="email" name="email" class="form-control" value="<?php echo $user['email']?>">
+    	              		</div>
+    	              		<div class="form-group">
+    	              			<label>Password</label>
+    	              			<input type="password" name="password" class="form-control" value="">
+    	              		</div>
+    	              		<div class="form-group">
+    	              			<label>Re-enter Password</label>
+    	              			<input type="password" name="re_password" class="form-control" value="">
+    	              		</div>
+    	              		<div class="form-group">
+    	              			<button class="btn btn-success btn-block font-weight-bold" type="submit">Save</button>
+    	              		</div>
+    	              	</form>
+                  	<?php
                         } else {
                     ?>
-                      <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#add-new">
-                        ADD NEW
-                      </button>
+    	                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#add-new">
+    	                  ADD NEW
+    	                </button>
                     <?php } 
                     ?>
                   </div>
@@ -368,29 +368,29 @@ $userList = getUserByType(ADMINS);
                   <table id="table-courses" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-              <th>#</th>
-                      <th>Full Name</th>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
+    					<th>#</th>
+    	                <th>Full Name</th>
+    	                <th>Username</th>
+    	                <th>Email</th>
+    	                <th>Edit</th>
+    	                <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
-              <?php 
-              foreach($userList as $user) : 
-              ?>
-                <tr>
-                  <td><?php echo $user['id']; ?></td>
-                  <td><?php echo $user['username']; ?></td>
-                  <td><?php echo $user['full_name']; ?></td>
-                  <td><?php echo $user['email']; ?></td>
-                  <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
-                  <td><a href="admins.php?delete=<?php echo $user['id'];?>" class="btn btn-danger">Delete</a></td>
-                </tr>
-              <?php 
-              endforeach; 
-              ?>
+    					<?php 
+    					foreach($userList as $user) : 
+    					?>
+    					  <tr>
+    					    <td><?php echo $user['id']; ?></td>
+    					    <td><?php echo $user['username']; ?></td>
+    					    <td><?php echo $user['full_name']; ?></td>
+    					    <td><?php echo $user['email']; ?></td>
+    					    <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
+    					    <td><a href="admins.php?delete=<?php echo $user['id'];?>" class="btn btn-danger">Delete</a></td>
+    					  </tr>
+    					<?php 
+    					endforeach; 
+    					?>
                     </tbody>
                     <tfoot>
                     <tr>

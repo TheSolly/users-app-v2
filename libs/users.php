@@ -47,16 +47,18 @@ function getUserByType($type)
 	}
 }
 
-function insertUser($full_name, $username, $password)
+function insertUser($username, $full_name, $email, $password, $type)
 {
 	global $dbh;
 	global $tableNameUser;
-	$sql = "INSERT INTO $tableNameUser (`username`,`full_name`, `password`) VALUES (:username, :full_name, :password)";
+	$sql = "INSERT INTO $tableNameUser (`username`,`full_name`,`email`, `password`, `type`) VALUES (:username, :full_name, :email, :password, :type)";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":username" => $username,
 		":full_name" => $full_name,
-		":password" => md5($password)
+		":email" => $email,
+		":password" => md5($password),
+		":type" => $type
 	];
 	if ($stm->execute($data)) {
 		return $dbh->lastInsertId();
@@ -82,17 +84,18 @@ function deleteUserbyId($id)
 
 }
 
-function updateUser($id, $username, $full_name, $password)
+function updateUser($id, $username, $full_name, $email, $password)
 {
 	global $dbh;
 	global $tableNameUser;
 	$sql = "UPDATE $tableNameUser 
-			SET username = :username, full_name = :full_name, password = :password 
+			SET username = :username, full_name = :full_name, email = :email, password = :password 
 			WHERE id = $id";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":username" => $username,
 		":full_name" => $full_name,
+		":email" => $email,
 		":password" => md5($password)
 	];
 	if ($stm->execute($data)) {

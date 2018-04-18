@@ -19,7 +19,7 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['passwor
   $email = $_POST['email'];
   $password = $_POST['password'];
   $re_password = $_POST['re_password'];
-  $type = ADMINS;
+  $type = STUDENTS;
 
   if (isset($_POST['id'])) {
     $id = $_POST['id'];
@@ -33,7 +33,7 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['passwor
   
 }
 
-$userList = getUserByType(ADMINS);
+$userList = getUserByType(STUDENTS);
 
  ?>
 
@@ -285,8 +285,8 @@ $userList = getUserByType(ADMINS);
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="admins.php"> <span>Admins</span></a></li>
-                <li><a href="students.php"> <span>Students</span></a></li>
+                <li><a href="admins.php"> <span>Admins</span></a></li>
+                <li class="active"><a href="students.php"> <span>Students</span></a></li>
                 <li><a href="teachers.php"> <span>Teachers</span></a></li>
               </ul>
             </li>
@@ -301,11 +301,11 @@ $userList = getUserByType(ADMINS);
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            All Admins
+            All Students
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Admins</li>
+            <li class="active">Students</li>
           </ol>
         </section>
 
@@ -315,7 +315,7 @@ $userList = getUserByType(ADMINS);
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">All Admins Table</h3>
+                  <h3 class="box-title">All Students Table</h3>
                 </div>
                 <div class="row">
                   <div class="col-xs-8 col-xs-offset-2">
