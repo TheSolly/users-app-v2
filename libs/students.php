@@ -90,7 +90,7 @@ function updateStudent($id, $username, $full_name, $email, $password)
 }
 
 
-function login($username, $password)
+function loginStudent($username, $password)
 {
 	global $dbh;
 	global $tableNameStudents;
@@ -107,5 +107,3 @@ function login($username, $password)
 		return false;
 	}
 }
-
-getStudentById(0);

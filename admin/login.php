@@ -8,7 +8,8 @@ if (isset($_SESSION['user'])) {
 if (isset($_POST['username'], $_POST['password'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	if ($user = login($username, $password)) {
+	$type = ADMINS;
+	if ($user = loginAdmin($username, $password, $type)) {
 		session_start();
 		$_SESSION['user'] = $user;
 		?> <script type="text/javascript">

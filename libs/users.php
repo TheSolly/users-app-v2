@@ -84,22 +84,42 @@ function deleteUserbyId($id)
 
 }
 
-function updateUser($id, $username, $full_name, $email, $password)
+function updateUser($id, $username, $full_name, $email, $password, $type)
 {
 	global $dbh;
 	global $tableNameUser;
 	$sql = "UPDATE $tableNameUser 
-			SET username = :username, full_name = :full_name, email = :email, password = :password 
+			SET username = :username, full_name = :full_name, email = :email, password = :password, type = :type 
 			WHERE id = $id";
 	$stm = $dbh->prepare($sql);
 	$data = [
 		":username" => $username,
 		":full_name" => $full_name,
 		":email" => $email,
-		":password" => md5($password)
+		":password" => md5($password),
+		":type" => $type
 	];
 	if ($stm->execute($data)) {
 		return true;
+	} else {
+		return false;
+	}
+}
+
+function loginAdmin($username, $password, $type)
+{
+	global $dbh;
+	global $tableNameUser;
+	$sql = "SELECT full_name, id, username FROM $tableNameUser 
+            WHERE username=:username AND password=:password AND type=:type";
+    $stm = $dbh->prepare($sql);
+    $data = [
+		":username" => $username,
+		":password" => md5($password),
+		":type" => $type
+	];
+	if ($stm->execute($data)) {
+		return $stm->fetch();
 	} else {
 		return false;
 	}

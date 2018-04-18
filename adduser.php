@@ -1,13 +1,15 @@
 <?php 
 require_once 'config/config.php';
 
-if (isset($_POST['username'],$_POST['full_name'],$_POST['password'],$_POST['re-password'])) {
+if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['password'],$_POST['re-password'])) {
 	$username = $_POST['username'];
 	$full_name = $_POST['full_name'];
+	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$re_password = $_POST['re-password'];
+	$type = STUDENTS;
 	
-	if (insertUser($full_name, $username, $password)) {
+	if (insertUser($username, $full_name, $email, $password, $type)) {
 		?> <script type="text/javascript">
 			var full_name = "<?php echo $full_name; ?>";
 			alert(full_name + " " +"Has been added successfully");
@@ -25,7 +27,7 @@ _header(APP_NAME);
 
 <div class="col-12">
 	<div class="col-12">
-		<a href="index.php" class="h4 page-link bg-primary text-white text-center text-uppercase font-weight-bold">All Users</a>
+		<a href="index.php" class="h4 page-link bg-primary text-white text-center text-uppercase font-weight-bold">All Students</a>
 	</div>
 </div>
 <div class="row justify-content-center">
@@ -39,6 +41,10 @@ _header(APP_NAME);
 			<div class="form-group">
 				<label>Username</label>
 				<input type="text" name="username" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>email</label>
+				<input type="email" name="email" class="form-control">
 			</div>
 			<div class="form-group">
 				<label>Password</label>
