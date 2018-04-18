@@ -9,7 +9,7 @@ if (isset($_GET['delete'])) {
   else {
     $id = $_GET['delete'];
     deleteUserbyId($id);
-    exit(header("location:admins.php"));
+    exit(header("location:students.php"));
   }
 }
 
@@ -24,7 +24,7 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['passwor
   if (isset($_POST['id'])) {
     $id = $_POST['id'];
     updateUser($id, $username, $full_name, $email, $password);
-    header("location:admins.php");
+    header("location:students.php");
       exit();
   }
   else {
@@ -386,7 +386,7 @@ $userList = getUserByType(STUDENTS);
                   <td><?php echo $user['full_name']; ?></td>
                   <td><?php echo $user['email']; ?></td>
                   <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
-                  <td><a href="admins.php?delete=<?php echo $user['id'];?>" class="btn btn-danger">Delete</a></td>
+                  <td><a href="students.php?delete=<?php echo $user['id'];?>" class="btn btn-danger">Delete</a></td>
                 </tr>
               <?php 
               endforeach; 
