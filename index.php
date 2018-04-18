@@ -19,7 +19,7 @@ _header(APP_NAME);
  ?>
     <div class="row">
       <div class="col-12">
-        <a href="adduser.php" class="h4 page-link bg-primary text-white text-center text-uppercase font-weight-bold">Add New student</a>
+        <a href="adduser.php" class="h4 page-link bg-primary text-white text-center text-uppercase font-weight-bold">Add New User</a>
         <table class="table table-bordered text-lg-center mt-2">
             <thead class="thead-dark">
               <tr>

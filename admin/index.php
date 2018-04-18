@@ -261,9 +261,9 @@ if (!isset($_SESSION['user'])) {
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="admins.php"> <span>Admins</span></a></li>
-            <li><a href="students.php"> <span>Students</span></a></li>
-            <li><a href="teachers.php"> <span>Teachers</span></a></li>
+            <li><a href="<?php echo ADMIN_URL; ?>admins.php"> <span>Admins</span></a></li>
+            <li><a href="<?php echo ADMIN_URL; ?>students.php"> <span>Students</span></a></li>
+            <li><a href="<?php echo ADMIN_URL; ?>teachers.php"> <span>Teachers</span></a></li>
           </ul>
         </li>
       </ul>
