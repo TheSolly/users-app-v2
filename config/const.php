@@ -50,6 +50,7 @@ define('IMG_DIR', BASE_URL . "templates/images" . "/");
 
 // Admin URLs
 define('ADMIN_URL', BASE_URL . "admin" . "/");
+define('ADMIN_TEMP_URL', ADMIN_URL . "templates/");
 define('CSS_ADMIN_URL', ADMIN_URL . "templates/css" . "/");
 define('JS_ADMIN_DIR', ADMIN_URL . "templates/js" . "/");
 
