@@ -3,6 +3,8 @@ require_once '../config/config.php';
 
 
 
+$userList = getUserByType(1);
+
 
 
 
@@ -302,32 +304,33 @@ require_once '../config/config.php';
               <table id="table-courses" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Course Name</th>
-                  <th>Teacher Name</th>
-                  <th>Description</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+					<th>#</th>
+	                <th>Full Name</th>
+	                <th>Username</th>
+	                <th>Email</th>
+	                <th>Edit</th>
+	                <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td><button class="btn btn-info">Edit</button></td>
-                  <td><button class="btn btn-danger">Delete</button></td>
-                </tr>
-
+					<?php 
+					foreach($userList as $user) : 
+					?>
+					  <tr>
+					    <td><?php echo $user['id']; ?></td>
+					    <td><?php echo $user['username']; ?></td>
+					    <td><?php echo $user['full_name']; ?></td>
+					    <td><?php echo $user['email']; ?></td>
+					    <td><a href="updateuser.php?user_id=<?php echo $user['id'];?>" class="btn btn-secondary">Edit</a></td>
+					    <td><a href="index.php?delete=<?php echo $user['id'];?>" class="btn btn-danger">Delete</a></td>
+					  </tr>
+					<?php 
+					endforeach; 
+					?>
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
+
                 </tr>
                 </tfoot>
               </table>

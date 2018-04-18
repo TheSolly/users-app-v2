@@ -9,7 +9,7 @@ function getAllUsers()
 	$sql = "SELECT * FROM $tableNameUser";
 	$stm = $dbh->prepare($sql);
 	if ($stm->execute()) {
-		return $stm->fetchAll(PDO::FETCH_ASSOC);
+		return $stm->fetchAll();
 	} else {
 		return false;
 	}
@@ -25,7 +25,23 @@ function getUserById($id)
 		":id"=>$id
 	];
 	if ($stm->execute($data)) {
-		return $stm->fetch(PDO::FETCH_ASSOC);
+		return $stm->fetch();
+	} else {
+		return false;
+	}
+}
+
+function getUserByType($type)
+{
+	global $dbh;
+	global $tableNameUser;
+	$sql = "SELECT * FROM $tableNameUser WHERE type=:type";
+	$stm = $dbh->prepare($sql);
+	$data = [
+		":type"=>$type
+	];
+	if ($stm->execute($data)) {
+		return $stm->fetchAll();
 	} else {
 		return false;
 	}
