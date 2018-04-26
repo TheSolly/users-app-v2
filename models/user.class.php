@@ -130,11 +130,7 @@ class User
 			":password" => md5($password),
 			":type" => $type
 		];
-		
-		if ($stm->execute($data)) {
-			return $stm->fetch();
-		} else {
-			return false;
-		}
+
+		return ($stm->execute($data)) ? $stm->fetch() : false ;
 	}
 }

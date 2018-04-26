@@ -9,9 +9,9 @@ if (isset($_POST['username'], $_POST['password'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$type = ADMINS;
-	if ($user = loginAdmin($username, $password, $type)) {
+	if (User::login($username,$password,$type)) {
 		session_start();
-		$_SESSION['user'] = $user;
+		$_SESSION['user'] = $username;
 		?> <script type="text/javascript">
 			var username = "<?php echo $username; ?>";
 			alert(username + " " +"logged in successfully");
