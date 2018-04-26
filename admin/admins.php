@@ -22,18 +22,22 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['passwor
   $type = ADMINS;
 
   if (isset($_POST['id'])) {
+  	// Update users
     $id = $_POST['id'];
-    updateUser($id, $username, $full_name, $email, $password);
+    $user = new User($username, $full_name, $email, $password, $type, $id);
+    $user->update();
     header("location:admins.php");
       exit();
   }
   else {
-    insertUser($username, $full_name, $email, $password, $type);
+  	// Insert users
+  	$user = new User($username, $full_name, $email, $password, $type);
+    $user->insert();
   }
   
 }
 
-$userList = getUserByType(ADMINS);
+$userList = User::all();
 
  ?>
 
@@ -321,7 +325,7 @@ $userList = getUserByType(ADMINS);
 		          <div class="col-xs-8 col-xs-offset-2">
 		            <?php
 		                if (isset($_GET['edit'])){
-		                    $user = getUserById($_GET['edit']);
+		                    $user = User::find($_GET['edit']);
 		            ?>
 		              <form action="" method="post">
 		                <div class="form-text bg-success text-white text-center font-weight-bold rounded">Update User</div>

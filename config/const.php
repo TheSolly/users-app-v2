@@ -33,6 +33,7 @@ define('DS', DIRECTORY_SEPARATOR);
 define('APP_PATH', dirname(__DIR__) . DS);
 define('CONIFG_PATH', APP_PATH . "config" . DS);
 define('LIBS_PATH', APP_PATH . "libs" . DS);
+define('MODELS_PATH', APP_PATH . "models" . DS);
 define('TEMP_PATH', APP_PATH . "templates" . DS);
 define('LAYOUTS_PATH', TEMP_PATH . "layout" . DS);
 
@@ -60,9 +61,15 @@ define('ADMIN_TEMP_URL', ADMIN_URL . "templates/");
 define('CSS_ADMIN_URL', ADMIN_URL . "templates/css" . "/");
 define('JS_ADMIN_DIR', ADMIN_URL . "templates/js" . "/");
 
+// Load Models
 
+$models = ['user',
+			'course'
+			];
 
-
+// Load libs
+$libs = ['validations'
+			];
 
 
 
