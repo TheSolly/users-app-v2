@@ -109,7 +109,7 @@ class User
 	{
 		global $dbh;
 
-		$sql = "DELETE FROM" . self::$tableName . " WHERE id=:id";
+		$sql = "DELETE FROM " . self::$tableName . " WHERE id=:id";
 
 		$stm = $dbh->prepare($sql);
 		$data = [
