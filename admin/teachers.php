@@ -8,7 +8,7 @@ if (isset($_GET['delete'])) {
   }
   else {
     $id = $_GET['delete'];
-    deleteUserbyId($id);
+    User::delete($id);
     exit(header("location:teachers.php"));
   }
 }
@@ -23,17 +23,20 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['passwor
 
 	if (isset($_POST['id'])) {
 		$id = $_POST['id'];
-		updateUser($id, $username, $full_name, $email, $password);
+		$user = new User($username, $full_name, $email, $password, $type, $id);
+    $user->update();
 		header("location:teachers.php");
 	    exit();
 	}
 	else {
-		insertUser($username, $full_name, $email, $password, $type);
+		$user = new User($username, $full_name, $email, $password, $type);
+    $user->insert();
 	}
 	
 }
 
-$userList = getUserByType(TEACHERS);
+$type = TEACHERS;
+$userList = User::allType($type);
 
  ?>
 

@@ -116,4 +116,25 @@ class User
 		];
 		return ($stm->execute($data)) ? true : false ;
 	}
+
+	public static function login($username, $password, $type)
+	{
+		global $dbh;
+
+		$sql = "SELECT full_name, id, username FROM " . self::$tableName . 
+	            " WHERE username=:username AND password=:password AND type=:type";
+
+	    $stm = $dbh->prepare($sql);
+	    $data = [
+			":username" => $username,
+			":password" => md5($password),
+			":type" => $type
+		];
+		
+		if ($stm->execute($data)) {
+			return $stm->fetch();
+		} else {
+			return false;
+		}
+	}
 }
