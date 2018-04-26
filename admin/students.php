@@ -324,7 +324,7 @@ $userList = User::allType($type);
                   <div class="col-xs-8 col-xs-offset-2">
                     <?php
                         if (isset($_GET['edit'])){
-                            $user = getUserById($_GET['edit']);
+                            $user = User::find($_GET['edit']);
                     ?>
                       <form action="" method="post">
                         <div class="form-text bg-success text-white text-center font-weight-bold rounded">Update User</div>

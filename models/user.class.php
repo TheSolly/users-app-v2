@@ -48,7 +48,7 @@ class User
 
 		$sql = "UPDATE " . self::$tableName .  
 			" SET username = :username, full_name = :full_name, email = :email, password = :password, type = :type 
-			WHERE id = $id";
+			WHERE id = :id";
 
 		$stm = $dbh->prepare($sql);
 		$data = [
@@ -56,6 +56,7 @@ class User
 			":full_name" => $this->full_name,
 			":email" => $this->email,
 			":password" => md5($this->password),
+			":id" => $this->id,
 			":type" => $this->type
 		];
 
