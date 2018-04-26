@@ -103,4 +103,17 @@ class User
 
 		return ($stm->execute($data)) ? $stm->fetch() : false ;
 	}
+
+	public static function delete($id)
+	{
+		global $dbh;
+
+		$sql = "DELETE FROM" . self::$tableName . " WHERE id=:id";
+
+		$stm = $dbh->prepare($sql);
+		$data = [
+			":id"=>$id
+		];
+		return ($stm->execute($data)) ? true : false ;
+	}
 }

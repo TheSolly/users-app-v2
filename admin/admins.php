@@ -8,7 +8,7 @@ if (isset($_GET['delete'])) {
   }
   else {
     $id = $_GET['delete'];
-    deleteUserbyId($id);
+    User::delete($id);
     exit(header("location:admins.php"));
   }
 }
@@ -37,7 +37,8 @@ if (isset($_POST['username'],$_POST['full_name'],$_POST['email'],$_POST['passwor
   
 }
 
-$userList = User::all();
+$type = ADMINS;
+$userList = User::allType($type);
 
  ?>
 
