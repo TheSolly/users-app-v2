@@ -3,12 +3,12 @@ require_once '../config/config.php';
 
 session_start();
 if (!isset($_SESSION['user'])) {
-    exit(header("Location:" . ADMIN_URL . "login.php"));
+  exit(header("Location:" . ADMIN_URL . "login.php"));
 }
 
 
 
- ?>
+?>
 
 
 <!DOCTYPE html>
@@ -253,7 +253,7 @@ if (!isset($_SESSION['user'])) {
         <li class="header">Main Nav</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="index.php"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
-        <li><a href="courses.html"><i class="fa fa-book"></i> <span>Courses</span></a></li>
+        <li><a href="courses.php"><i class="fa fa-book"></i> <span>Courses</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-user"></i> <span>Users</span>
             <span class="pull-right-container">

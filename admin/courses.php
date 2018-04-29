@@ -2,36 +2,36 @@
 require_once '../config/config.php';
 
 if (isset($_GET['delete'])) {
-	if (isset($_GET['delete']) == null) {
-		header("location:404.php");
-		exit();
-	} else {
-		$id = $_GET['delete'];
-		User::delete($id);
-		exit(header("location:admins.php"));
-	}
+    if (isset($_GET['delete']) == null) {
+        header("location:404.php");
+        exit();
+    } else {
+        $id = $_GET['delete'];
+        User::delete($id);
+        exit(header("location:admins.php"));
+    }
 }
 
 if (isset($_POST['username'], $_POST['full_name'], $_POST['email'], $_POST['password'], $_POST['re_password'])) {
-	$username = $_POST['username'];
-	$full_name = $_POST['full_name'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$re_password = $_POST['re_password'];
-	$type = ADMINS;
+    $username = $_POST['username'];
+    $full_name = $_POST['full_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $re_password = $_POST['re_password'];
+    $type = ADMINS;
 
-	if (isset($_POST['id'])) {
+    if (isset($_POST['id'])) {
   	// Update users
-		$id = $_POST['id'];
-		$user = new User($username, $full_name, $email, $password, $type, $id);
-		$user->update();
-		header("location:admins.php");
-		exit();
-	} else {
+        $id = $_POST['id'];
+        $user = new User($username, $full_name, $email, $password, $type, $id);
+        $user->update();
+        header("location:admins.php");
+        exit();
+    } else {
   	// Insert users
-		$user = new User($username, $full_name, $email, $password, $type);
-		$user->insert();
-	}
+        $user = new User($username, $full_name, $email, $password, $type);
+        $user->insert();
+    }
 
 }
 
@@ -279,16 +279,16 @@ $userList = User::allType($type);
 		  <ul class="sidebar-menu" data-widget="tree">
 		    <li class="header">Main Nav</li>
 		    <!-- Optionally, you can add icons to the links -->
-		    <li ><a href="index.php"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
-		    <li><a href="courses.php"><i class="fa fa-book"></i> <span>Courses</span></a></li>
-		    <li class="treeview active">
+		    <li><a href="index.php"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
+		    <li class="active"><a href="courses.php"><i class="fa fa-book"></i> <span>Courses</span></a></li>
+		    <li class="treeview">
 		      <a href="#"><i class="fa fa-user"></i> <span>Users</span>
 		        <span class="pull-right-container">
 		            <i class="fa fa-angle-left pull-right"></i>
 		          </span>
 		      </a>
 		      <ul class="treeview-menu">
-		        <li class="active"><a href="admins.php"> <span>Admins</span></a></li>
+		        <li><a href="admins.php"> <span>Admins</span></a></li>
 		        <li><a href="students.php"> <span>Students</span></a></li>
 		        <li><a href="teachers.php"> <span>Teachers</span></a></li>
 		      </ul>
@@ -323,9 +323,9 @@ $userList = User::allType($type);
 		        <div class="row">
 		          <div class="col-xs-8 col-xs-offset-2">
 		            <?php
-													if (isset($_GET['edit'])) {
-														$user = User::find($_GET['edit']);
-														?>
+                if (isset($_GET['edit'])) {
+                    $user = User::find($_GET['edit']);
+                    ?>
 		              <form action="" method="post">
 		                <div class="form-text bg-success text-white text-center font-weight-bold rounded">Update User</div>
 		                <div class="form-group">
@@ -357,14 +357,14 @@ $userList = User::allType($type);
 		              </form>
 		            <?php
 
-												} else {
-													?>
+            } else {
+                ?>
 		              <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#add-new">
 		                ADD NEW
 		              </button>
 		            <?php 
-												}
-												?>
+            }
+            ?>
 		          </div>
 		        </div>
 		        <!-- /.box-header -->
@@ -383,8 +383,8 @@ $userList = User::allType($type);
 		            </thead>
 		            <tbody>
 		      <?php 
-							foreach ($userList as $user) :
-							?>
+        foreach ($userList as $user) :
+        ?>
 		        <tr>
 		          <td><?php echo $user['id']; ?></td>
 		          <td><?php echo $user['username']; ?></td>
@@ -394,8 +394,8 @@ $userList = User::allType($type);
 		          <td><a href="admins.php?delete=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a></td>
 		        </tr>
 		      <?php 
-							endforeach;
-							?>
+        endforeach;
+        ?>
 		            </tbody>
 		            <tfoot>
 		            <tr>
