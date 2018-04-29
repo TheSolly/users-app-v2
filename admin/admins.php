@@ -36,7 +36,7 @@ if (isset($_POST['username'], $_POST['full_name'], $_POST['email'], $_POST['pass
 }
 
 $type = ADMINS;
-$userList = User::allType($type);
+$userList = User::find($type, "type");
 
 ?>
 
