@@ -22,11 +22,8 @@ class Course
 		$stm = $dbh->prepare($sql);
 
 		$data = [
-			":username" => $this->username,
-			":full_name" => $this->full_name,
-			":email" => $this->email,
-			":password" => md5($this->password),
-			":type" => $this->type
+			":user_id" => $this->user_id,
+			":name" => $this->name,
 		];
 
 		if ($stm->execute($data)) {
@@ -97,20 +94,5 @@ class Course
 		return ($stm->execute($data)) ? true : false;
 	}
 
-	public static function login($username, $password, $type)
-	{
-		global $dbh;
 
-		$sql = "SELECT full_name, id, username FROM " . self::$tableName .
-			" WHERE username=:username AND password=:password AND type=:type";
-
-		$stm = $dbh->prepare($sql);
-		$data = [
-			":username" => $username,
-			":password" => md5($password),
-			":type" => $type
-		];
-
-		return ($stm->execute($data)) ? $stm->fetch() : false;
-	}
 }

@@ -25,9 +25,9 @@ if (isset($_POST['name'], $_POST['user_id'])) {
 			exit();
 		}
 	} else {
-  	// Insert course
-		$user = new User($username, $full_name, $email, $password, $type);
-		$user->insert();
+		// Insert course
+		$course = new Course($name, $user_id);
+		$course->insert();
 	}
 
 }
@@ -334,7 +334,7 @@ $coursesList = Course::all();
 										<div class="form-group ">
 		                  <select name="user_id" class="form-control">
 														<?php
-													foreach (User::allType(TEACHERS) as $user) {
+													foreach (User::find(TEACHERS, "type") as $user) {
 														if ($user["id"] == $course["user_id"]) {
 															?>
 																<option selected value="<?php echo $user["id"] ?>"> <?php echo $user["full_name"] ?></option>
@@ -622,36 +622,31 @@ $coursesList = Course::all();
 		    <div class="modal-header">
 		      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		        <span aria-hidden="true">&times;</span></button>
-		      <h4 class="modal-title">Add New Admin</h4>
+		      <h4 class="modal-title">Add New Course</h4>
 		    </div>
 		    <form action="" method="post">
 		      <div class="modal-body">
 		        <div class="row">
 		          <div class="col-xs-12 col-md-6">
 		            <div class="form-group">
-		              <input type="text" class="form-control" placeholder="Username" name="username">
+		              <input type="text" class="form-control" placeholder="Course Name" name="name">
 		            </div>
 		          </div>
-		          <div class="col-xs-12 col-md-6">
-		            <div class="form-group">
-		              <input type="text" class="form-control" placeholder="Full Name" name="full_name">
-		            </div>
-		          </div>
-		          <div class="col-xs-12 col-md-6">
-		            <div class="form-group">
-		              <input type="email" class="form-control" placeholder="Email" name="email">
-		            </div>
-		          </div>
-		          <div class="col-xs-12 col-md-6">
-		            <div class="form-group">
-		              <input type="password" class="form-control" placeholder="Password" name="password">
-		            </div>
-		          </div>
-		          <div class="col-xs-12 col-md-6">
-		            <div class="form-group">
-		              <input type="password" class="form-control" placeholder="Re enter Password" name="re_password">
-		            </div>
-		          </div>
+							<div class="col-xs-12 col-md-6">
+								<div class="form-group">
+									<select name="user_id" class="form-control">
+										<?php
+									foreach (User::find(TEACHERS, "type") as $user) {
+										?>
+										<option value="<?php echo $user["id"] ?> "> <?php echo $user["username"] ?></option>
+										<?php
+
+								}
+								?>
+
+									</select>
+								</div>
+							</div>	
 		        </div>
 		      </div>
 		      <div class="modal-footer">

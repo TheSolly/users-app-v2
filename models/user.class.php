@@ -10,7 +10,7 @@ class User
 	private $id;
 	private static $tableName = "users";
 
-	function __construct($username, $full_name, $email, $password, $type, $id=null)
+	function __construct($username, $full_name, $email, $password, $type, $id = null)
 	{
 		$this->username = $username;
 		$this->full_name = $full_name;
@@ -28,11 +28,11 @@ class User
 		$stm = $dbh->prepare($sql);
 
 		$data = [
-		":username" => $this->username,
-		":full_name" => $this->full_name,
-		":email" => $this->email,
-		":password" => md5($this->password),
-		":type" => $this->type
+			":username" => $this->username,
+			":full_name" => $this->full_name,
+			":email" => $this->email,
+			":password" => md5($this->password),
+			":type" => $this->type
 		];
 
 		if ($stm->execute($data)) {
@@ -46,7 +46,7 @@ class User
 	{
 		global $dbh;
 
-		$sql = "UPDATE " . self::$tableName .  
+		$sql = "UPDATE " . self::$tableName .
 			" SET username = :username, full_name = :full_name, email = :email, password = :password, type = :type 
 			WHERE id = :id";
 
@@ -75,7 +75,7 @@ class User
 		$sql = "SELECT * FROM " . self::$tableName;
 		$stm = $dbh->prepare($sql);
 
-		return ($stm->execute()) ?  $stm->fetchAll(): false ;
+		return ($stm->execute()) ? $stm->fetchAll() : false;
 	}
 
 	public static function allType($type)
@@ -86,23 +86,25 @@ class User
 		$stm = $dbh->prepare($sql);
 
 		$data = [
-			":type"=>$type
+			":type" => $type
 		];
 
-		return ($stm->execute($data)) ?  $stm->fetchAll(): false ;
+		return ($stm->execute($data)) ? $stm->fetchAll() : false;
 	}
 
-	public static function find($id)
+	public static function find($value, $attr = "id")
 	{
 		global $dbh;
 
-		$sql = "SELECT * FROM " . self::$tableName ." WHERE id=:id";
+		$sql = "SELECT * FROM " . self::$tableName . " WHERE $attr=:value";
 		$stm = $dbh->prepare($sql);
 		$data = [
-			":id"=>$id
+			":value" => $value
 		];
 
-		return ($stm->execute($data)) ? $stm->fetch() : false ;
+		$result = ($stm->execute($data)) ? $stm->fetchAll() : false;
+
+		return $attr != "id" ? $result : $result[0];
 	}
 
 	public static function delete($id)
@@ -113,25 +115,25 @@ class User
 
 		$stm = $dbh->prepare($sql);
 		$data = [
-			":id"=>$id
+			":id" => $id
 		];
-		return ($stm->execute($data)) ? true : false ;
+		return ($stm->execute($data)) ? true : false;
 	}
 
 	public static function login($username, $password, $type)
 	{
 		global $dbh;
 
-		$sql = "SELECT full_name, id, username FROM " . self::$tableName . 
-	            " WHERE username=:username AND password=:password AND type=:type";
+		$sql = "SELECT full_name, id, username FROM " . self::$tableName .
+			" WHERE username=:username AND password=:password AND type=:type";
 
-	    $stm = $dbh->prepare($sql);
-	    $data = [
+		$stm = $dbh->prepare($sql);
+		$data = [
 			":username" => $username,
 			":password" => md5($password),
 			":type" => $type
 		];
 
-		return ($stm->execute($data)) ? $stm->fetch() : false ;
+		return ($stm->execute($data)) ? $stm->fetch() : false;
 	}
 }
