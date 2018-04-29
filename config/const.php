@@ -40,7 +40,7 @@ define('LAYOUTS_PATH', TEMP_PATH . "layout" . DS);
 
 // Admin Dir Paths
 
-define('ADMIN_PATH', APP_PATH ."admin" .  DS);
+define('ADMIN_PATH', APP_PATH . "admin" . DS);
 define('TEMP_ADMIN_PATH', ADMIN_PATH . "templates" . DS);
 define('LAYOUTS_ADMIN_PATH', TEMP_ADMIN_PATH . "layout" . DS);
 
@@ -57,19 +57,20 @@ define('IMG_DIR', BASE_URL . "templates/images" . "/");
 
 // Admin URLs
 define('ADMIN_URL', BASE_URL . "admin" . "/");
+define('COURSE_URL', BASE_URL . "courses" . "/");
 define('ADMIN_TEMP_URL', ADMIN_URL . "templates/");
 define('CSS_ADMIN_URL', ADMIN_URL . "templates/css" . "/");
 define('JS_ADMIN_DIR', ADMIN_URL . "templates/js" . "/");
 
 // Load Models
 
-$models = ['user',
-			'course'
-			];
+$models = [
+	'user',
+	'courses'
+];
 
 // Load libs
-$libs = ['validations'
-			];
+$libs = ['validations'];
 
 
 

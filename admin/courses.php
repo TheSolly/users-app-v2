@@ -2,42 +2,38 @@
 require_once '../config/config.php';
 
 if (isset($_GET['delete'])) {
-    if (isset($_GET['delete']) == null) {
-        header("location:404.php");
-        exit();
-    } else {
-        $id = $_GET['delete'];
-        User::delete($id);
-        exit(header("location:admins.php"));
-    }
+	if (isset($_GET['delete']) == null) {
+		header("location:404.php");
+		exit();
+	} else {
+		$id = $_GET['delete'];
+		Course::delete($id);
+		exit(header("location:courses.php"));
+	}
 }
 
-if (isset($_POST['username'], $_POST['full_name'], $_POST['email'], $_POST['password'], $_POST['re_password'])) {
-    $username = $_POST['username'];
-    $full_name = $_POST['full_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $re_password = $_POST['re_password'];
-    $type = ADMINS;
+if (isset($_POST['name'], $_POST['user_id'])) {
+	$name = $_POST['name'];
+	$user_id = $_POST['user_id'];
 
-    if (isset($_POST['id'])) {
-  	// Update users
-        $id = $_POST['id'];
-        $user = new User($username, $full_name, $email, $password, $type, $id);
-        $user->update();
-        header("location:admins.php");
-        exit();
-    } else {
-  	// Insert users
-        $user = new User($username, $full_name, $email, $password, $type);
-        $user->insert();
-    }
+	if (isset($_POST['id'])) {
+  	// Update course
+		$id = $_POST['id'];
+		$course = new Course($name, $user_id, $id);
+		if ($course->update()) {
+			header("location:courses.php");
+			exit();
+		}
+	} else {
+  	// Insert course
+		$user = new User($username, $full_name, $email, $password, $type);
+		$user->insert();
+	}
 
 }
 
-$type = ADMINS;
-$userList = User::allType($type);
 
+$coursesList = Course::all();
 ?>
 
  <!DOCTYPE html>
@@ -304,11 +300,11 @@ $userList = User::allType($type);
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 		  <h1>
-		    All Admins
+		    All Courses
 		  </h1>
 		  <ol class="breadcrumb">
-		    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		    <li class="active">Admins</li>
+		    <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+		    <li class="active">Courses</li>
 		  </ol>
 		</section>
 
@@ -318,38 +314,41 @@ $userList = User::allType($type);
 		    <div class="col-xs-12">
 		      <div class="box">
 		        <div class="box-header">
-		          <h3 class="box-title">All Admins Table</h3>
+		          <h3 class="box-title">All Courses Table</h3>
 		        </div>
 		        <div class="row">
 		          <div class="col-xs-8 col-xs-offset-2">
 		            <?php
-                if (isset($_GET['edit'])) {
-                    $user = User::find($_GET['edit']);
-                    ?>
+													if (isset($_GET['edit'])) {
+														$course = Course::find($_GET['edit']);
+														?>
 		              <form action="" method="post">
-		                <div class="form-text bg-success text-white text-center font-weight-bold rounded">Update User</div>
+		                <div class="form-text bg-success text-white text-center font-weight-bold rounded">Update Course</div>
 		                <div class="form-group">
-		                  <input type="hidden" name="id" class="form-control" value="<?php echo $user['id'] ?>">
+		                  <input type="hidden" name="id" class="form-control" value="<?php echo $course['id'] ?>">
 		                </div>
 		                <div class="form-group">
-		                  <label>Full Name</label>
-		                  <input type="text" name="full_name" class="form-control" value="<?php echo $user['full_name'] ?>">
+		                  <label>Course Name</label>
+		                  <input type="text" name="name" class="form-control" value="<?php echo $course['name'] ?>">
 		                </div>
-		                <div class="form-group">
-		                  <label>Username</label>
-		                  <input type="text" name="username" class="form-control" value="<?php echo $user['username'] ?>">
-		                </div>
-		                <div class="form-group">
-		                  <label>Email</label>
-		                  <input type="email" name="email" class="form-control" value="<?php echo $user['email'] ?>">
-		                </div>
-		                <div class="form-group">
-		                  <label>Password</label>
-		                  <input type="password" name="password" class="form-control" value="">
-		                </div>
-		                <div class="form-group">
-		                  <label>Re-enter Password</label>
-		                  <input type="password" name="re_password" class="form-control" value="">
+										<div class="form-group ">
+		                  <select name="user_id" class="form-control">
+														<?php
+													foreach (User::allType(TEACHERS) as $user) {
+														if ($user["id"] == $course["user_id"]) {
+															?>
+																<option selected value="<?php echo $user["id"] ?>"> <?php echo $user["full_name"] ?></option>
+
+														<?php 
+												} else {
+													?>
+															<option value = "<?php echo $user["id"] ?>"> <?php echo $user["full_name"] ?></option>
+															<?php
+
+													}
+												}
+												?>		
+											</select>
 		                </div>
 		                <div class="form-group">
 		                  <button class="btn btn-success btn-block font-weight-bold" type="submit">Save</button>
@@ -357,14 +356,14 @@ $userList = User::allType($type);
 		              </form>
 		            <?php
 
-            } else {
-                ?>
+												} else {
+													?>
 		              <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#add-new">
 		                ADD NEW
 		              </button>
 		            <?php 
-            }
-            ?>
+												}
+												?>
 		          </div>
 		        </div>
 		        <!-- /.box-header -->
@@ -374,28 +373,26 @@ $userList = User::allType($type);
 		            <thead>
 		            <tr>
 		      <th>#</th>
-		              <th>Full Name</th>
-		              <th>Username</th>
-		              <th>Email</th>
+		              <th>Course Name</th>
+		              <th>Teacher Name</th>
 		              <th>Edit</th>
 		              <th>Delete</th>
 		            </tr>
 		            </thead>
 		            <tbody>
 		      <?php 
-        foreach ($userList as $user) :
-        ?>
+							foreach ($coursesList as $course) :
+							?>
 		        <tr>
-		          <td><?php echo $user['id']; ?></td>
-		          <td><?php echo $user['username']; ?></td>
-		          <td><?php echo $user['full_name']; ?></td>
-		          <td><?php echo $user['email']; ?></td>
-		          <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
-		          <td><a href="admins.php?delete=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a></td>
+		          <td><?php echo $course['id']; ?></td>
+		          <td><?php echo $course['name']; ?></td>
+		          <td><?php echo $course['teacher_name']; ?></td>
+		          <td><a href="courses.php?edit=<?php echo $course['id']; ?>" class="btn btn-secondary">Edit</a></td>
+		          <td><a href="courses.php?delete=<?php echo $course['id']; ?>" class="btn btn-danger">Delete</a></td>
 		        </tr>
 		      <?php 
-        endforeach;
-        ?>
+							endforeach;
+							?>
 		            </tbody>
 		            <tfoot>
 		            <tr>

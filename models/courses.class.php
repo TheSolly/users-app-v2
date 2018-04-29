@@ -1,6 +1,6 @@
 <?php
 
-class User
+class Course
 {
 	private $user_id;
 	private $name;
@@ -41,17 +41,14 @@ class User
 		global $dbh;
 
 		$sql = "UPDATE " . self::$tableName .
-			" SET username = :username, full_name = :full_name, email = :email, password = :password, type = :type 
+			" SET name = :name, user_id = :user_id
 			WHERE id = :id";
 
 		$stm = $dbh->prepare($sql);
 		$data = [
-			":username" => $this->username,
-			":full_name" => $this->full_name,
-			":email" => $this->email,
-			":password" => md5($this->password),
+			":name" => $this->name,
+			":user_id" => $this->user_id,
 			":id" => $this->id,
-			":type" => $this->type
 		];
 
 		if ($stm->execute($data)) {
@@ -66,31 +63,19 @@ class User
 	{
 		global $dbh;
 
-		$sql = "SELECT * FROM " . self::$tableName;
+		$sql = "SELECT courses.*, users.full_name as teacher_name  FROM " . self::$tableName .
+			" INNER JOIN users on courses.user_id=users.id";
 		$stm = $dbh->prepare($sql);
 
 		return ($stm->execute()) ? $stm->fetchAll() : false;
-	}
-
-	public static function allType($type)
-	{
-		global $dbh;
-
-		$sql = "SELECT * FROM " . self::$tableName . " WHERE type=:type";
-		$stm = $dbh->prepare($sql);
-
-		$data = [
-			":type" => $type
-		];
-
-		return ($stm->execute($data)) ? $stm->fetchAll() : false;
 	}
 
 	public static function find($id)
 	{
 		global $dbh;
 
-		$sql = "SELECT * FROM " . self::$tableName . " WHERE id=:id";
+		$sql = "SELECT courses.*, users.full_name as teacher_name FROM " . self::$tableName .
+			" INNER JOIN users on courses.user_id = users.id WHERE courses.id=:id";
 		$stm = $dbh->prepare($sql);
 		$data = [
 			":id" => $id
