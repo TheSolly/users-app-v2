@@ -11,7 +11,7 @@ if (isset($_POST['del'])) {
     }
 
 } elseif (isset($_POST["getAll"])) {
-    foreach ($userList as $user) :
+    foreach (User::allType(ADMINS) as $user) :
     ?>
     <tr>
         <td><?php echo $user['id']; ?></td>
@@ -19,7 +19,7 @@ if (isset($_POST['del'])) {
         <td><?php echo $user['full_name']; ?></td>
         <td><?php echo $user['email']; ?></td>
         <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
-        <td><a href="admins.php?delete=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a></td>
+        <td><a user-id="<?php echo $user['id']; ?>" class="btn btn-danger del">Delete</a></td>
     </tr>
     <?php 
     endforeach;
