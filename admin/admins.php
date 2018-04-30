@@ -45,7 +45,7 @@ $userList = User::find($type, "type");
   <head>
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <title>AdminLTE 2 | Data Tables</title>
+	    <title>AdminLMS 2 | Data Tables</title>
 	    <!-- Tell the browser to be responsive to screen width -->
 	    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	    <!-- Bootstrap 3.3.7 -->
@@ -84,7 +84,7 @@ $userList = User::find($type, "type");
 		  <!-- mini logo for sidebar mini 50x50 pixels -->
 		  <span class="logo-mini"><b>A</b>LT</span>
 		  <!-- logo for regular state and mobile devices -->
-		  <span class="logo-lg"><b>Admin</b>LTE</span>
+		  <span class="logo-lg"><b>Admin</b>LMS</span>
 		</a>
 
 		<!-- Header Navbar -->
@@ -381,21 +381,7 @@ $userList = User::find($type, "type");
 		              <th>Delete</th>
 		            </tr>
 		            </thead>
-		            <tbody>
-		      <?php 
-							foreach ($userList as $user) :
-							?>
-		        <tr>
-		          <td><?php echo $user['id']; ?></td>
-		          <td><?php echo $user['username']; ?></td>
-		          <td><?php echo $user['full_name']; ?></td>
-		          <td><?php echo $user['email']; ?></td>
-		          <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
-		          <td><a href="admins.php?delete=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a></td>
-		        </tr>
-		      <?php 
-							endforeach;
-							?>
+		            <tbody id="user-data">
 		            </tbody>
 		            <tfoot>
 		            <tr>
@@ -693,5 +679,7 @@ $userList = User::find($type, "type");
 		    $('table').DataTable();
 		});
 		</script>
+		<!-- Main script -->
+		<script src="templates/js/code.js"></script>
 	</body>
 </html>
