@@ -20,7 +20,7 @@ if (isset($_POST['del'])) {
         <td><?php echo $user['full_name']; ?></td>
         <td><?php echo $user['email']; ?></td>
         <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
-        <td><a user-id="<?php echo $user['id']; ?>" class="btn btn-danger del">Delete</a></td>
+        <td><a id="<?php echo $user['id']; ?>" class="btn btn-danger del">Delete</a></td>
     </tr>
     <?php 
     endforeach;

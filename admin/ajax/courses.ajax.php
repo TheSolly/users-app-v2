@@ -19,7 +19,7 @@ if (isset($_POST['del'])) {
       <td course-name="<?php echo $course['name']; ?>" class="course-name"><?php echo $course['name']; ?></td>
       <td><?php echo $course['teacher_name']; ?></td>
       <td><a href="courses.php?edit=<?php echo $course['id']; ?>" class="btn btn-secondary">Edit</a></td>
-      <td><a href="courses.php?delete=<?php echo $course['id']; ?>" class="btn btn-danger del">Delete</a></td>
+      <td><a id="<?php echo $course['id']; ?>" class="btn btn-danger del">Delete</a></td>
     </tr>
     <?php 
     endforeach;

@@ -1,28 +1,29 @@
 $(function () {
+	url = pageUrl();
+	getAllCourses(url);
+	getAllUsers(url);
+
+});
+
+function pageUrl() {
 	var urladd = $(location).attr('href');
 	if (urladd == "http://localhost:9000/admin/admins.php") {
 		urladd = "http://localhost:9000/admin/ajax/admins.ajax.php";
-		getAllUsers(urladd);
 	}
 	else if (urladd == "http://localhost:9000/admin/students.php") {
 		urladd = "http://localhost:9000/admin/ajax/students.ajax.php";
-		getAllUsers(urladd);
 	}
 	else if (urladd == "http://localhost:9000/admin/teachers.php") {
 		urladd = "http://localhost:9000/admin/ajax/teachers.ajax.php";
-		getAllUsers(urladd);
 	}
 	else {
 		urladd = "http://localhost:9000/admin/ajax/courses.ajax.php";
-		getAllCourses(urladd);
 	}
-	console.log(urladd);
-});
-
-
-function getAllUsers(urladd) {
+	return urladd;
+}
+function getAllUsers(url) {
 	$.ajax({
-		url: urladd,
+		url: url,
 		type: 'POST',
 		data: {getAll: ''},
 		success: function (data) {
@@ -31,9 +32,9 @@ function getAllUsers(urladd) {
 	});
 }
 
-function getAllCourses(urladd) {
+function getAllCourses(url) {
 	$.ajax({
-		url: urladd,
+		url: url,
 		type: 'POST',
 		data: {getAll: ''},
 		success: function (data) {
@@ -44,14 +45,17 @@ function getAllCourses(urladd) {
 
 $(document).on('click', '.del', function() {
 	event.preventDefault();
-	var id = $(".del").attr('user-id');
+	var id = $(".del").attr('id');
 	$.ajax({
-		url: urladd,
+		url: pageUrl(),
 		type: 'POST',
 		data: {del: id},
 		success:function (data) {
 			alert(data);
-			getAllUsers(urladd);
+			url = pageUrl();
+			getAllCourses(url);
+			getAllUsers(url);
+
 		}
 	});
 }); 
