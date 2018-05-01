@@ -1,16 +1,16 @@
 <?php 
 require_once '../config/config.php';
 
-if (isset($_GET['delete'])) {
-  if (isset($_GET['delete']) == null) {
-    header("location:404.php");
-    exit();
-  } else {
-    $id = $_GET['delete'];
-    User::delete($id);
-    exit(header("location:teachers.php"));
-  }
-}
+// if (isset($_GET['delete'])) {
+//   if (isset($_GET['delete']) == null) {
+//     header("location:404.php");
+//     exit();
+//   } else {
+//     $id = $_GET['delete'];
+//     User::delete($id);
+//     exit(header("location:teachers.php"));
+//   }
+// }
 
 if (isset($_POST['username'], $_POST['full_name'], $_POST['email'], $_POST['password'], $_POST['re_password'])) {
   $username = $_POST['username'];
@@ -33,8 +33,8 @@ if (isset($_POST['username'], $_POST['full_name'], $_POST['email'], $_POST['pass
 
 }
 
-$type = TEACHERS;
-$userList = User::find($type, "type");
+// $type = TEACHERS;
+// $userList = User::find($type, "type");
 
 ?>
 
@@ -379,25 +379,10 @@ $userList = User::find($type, "type");
     	                <th>Delete</th>
                     </tr>
                     </thead>
-                    <tbody>
-    					<?php 
-        foreach ($userList as $user) :
-        ?>
-    					  <tr>
-    					    <td><?php echo $user['id']; ?></td>
-    					    <td><?php echo $user['username']; ?></td>
-    					    <td><?php echo $user['full_name']; ?></td>
-    					    <td><?php echo $user['email']; ?></td>
-    					    <td><a href="<?php ADMIN_URL; ?>?edit=<?php echo $user['id']; ?>" class="btn btn-secondary">Edit</a></td>
-    					    <td><a href="teachers.php?delete=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a></td>
-    					  </tr>
-    					<?php 
-        endforeach;
-        ?>
+                    <tbody id="user-data">
                     </tbody>
                     <tfoot>
                     <tr>
-
                     </tr>
                     </tfoot>
                   </table>
@@ -692,5 +677,6 @@ $userList = User::find($type, "type");
             $('table').DataTable();
         });
     </script>
+    <script src="templates/js/code.js"></script>
   </body>
 </html>

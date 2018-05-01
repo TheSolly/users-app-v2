@@ -8,12 +8,12 @@ if (isset($_GET['delete'])) {
   }
   else {
     $id = $_GET['delete'];
-    deleteUserbyId($id);
+    User::delete($id);
     exit(header("location:index.php"));
   }
 }
 
-$userList = getUserByType(STUDENTS);
+$courseList = Course::all();
 
 _header(APP_NAME);
  ?>
@@ -23,21 +23,19 @@ _header(APP_NAME);
         <table class="table table-bordered text-lg-center mt-2">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Username</th>
-                <th scope="col">First Name</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Teacher Name</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
             <tbody>
               <?php 
-              foreach($userList as $user) : 
+              foreach($courseList as $course) : 
               ?>
                 <tr>
-                  <td><?php echo $user['id']; ?></td>
-                  <td><?php echo $user['username']; ?></td>
-                  <td><?php echo $user['full_name']; ?></td>
+                  <td><?php echo $course['name']; ?></td>
+                  <td><?php echo $course['teacher_name']; ?></td>
                   <td><a href="updateuser.php?user_id=<?php echo $user['id'];?>" class="btn btn-secondary">Edit</a></td>
                   <td><a href="index.php?delete=<?php echo $user['id'];?>" class="btn btn-danger">Delete</a></td>
                 </tr>

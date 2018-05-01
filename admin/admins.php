@@ -1,16 +1,16 @@
 <?php 
 require_once '../config/config.php';
 
-if (isset($_GET['delete'])) {
-	if (isset($_GET['delete']) == null) {
-		header("location:404.php");
-		exit();
-	} else {
-		$id = $_GET['delete'];
-		User::delete($id);
-		exit(header("location:admins.php"));
-	}
-}
+// if (isset($_GET['delete'])) {
+// 	if (isset($_GET['delete']) == null) {
+// 		header("location:404.php");
+// 		exit();
+// 	} else {
+// 		$id = $_GET['delete'];
+// 		User::delete($id);
+// 		exit(header("location:admins.php"));
+// 	}
+// }
 
 if (isset($_POST['username'], $_POST['full_name'], $_POST['email'], $_POST['password'], $_POST['re_password'])) {
 	$username = $_POST['username'];
@@ -35,8 +35,8 @@ if (isset($_POST['username'], $_POST['full_name'], $_POST['email'], $_POST['pass
 
 }
 
-$type = ADMINS;
-$userList = User::find($type, "type");
+// $type = ADMINS;
+// $userList = User::find($type, "type");
 
 ?>
 
@@ -385,7 +385,6 @@ $userList = User::find($type, "type");
 		            </tbody>
 		            <tfoot>
 		            <tr>
-
 		            </tr>
 		            </tfoot>
 		          </table>

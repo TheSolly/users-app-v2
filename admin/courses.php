@@ -1,16 +1,16 @@
 <?php 
 require_once '../config/config.php';
 
-if (isset($_GET['delete'])) {
-	if (isset($_GET['delete']) == null) {
-		header("location:404.php");
-		exit();
-	} else {
-		$id = $_GET['delete'];
-		Course::delete($id);
-		exit(header("location:courses.php"));
-	}
-}
+// if (isset($_GET['delete'])) {
+// 	if (isset($_GET['delete']) == null) {
+// 		header("location:404.php");
+// 		exit();
+// 	} else {
+// 		$id = $_GET['delete'];
+// 		Course::delete($id);
+// 		exit(header("location:courses.php"));
+// 	}
+// }
 
 if (isset($_POST['name'], $_POST['user_id'])) {
 	$name = $_POST['name'];
@@ -33,7 +33,7 @@ if (isset($_POST['name'], $_POST['user_id'])) {
 }
 
 
-$coursesList = Course::all();
+// $coursesList = Course::all();
 ?>
 
  <!DOCTYPE html>
@@ -379,24 +379,10 @@ $coursesList = Course::all();
 		              <th>Delete</th>
 		            </tr>
 		            </thead>
-		            <tbody>
-		      <?php 
-							foreach ($coursesList as $course) :
-							?>
-		        <tr>
-		          <td><?php echo $course['id']; ?></td>
-		          <td><?php echo $course['name']; ?></td>
-		          <td><?php echo $course['teacher_name']; ?></td>
-		          <td><a href="courses.php?edit=<?php echo $course['id']; ?>" class="btn btn-secondary">Edit</a></td>
-		          <td><a href="courses.php?delete=<?php echo $course['id']; ?>" class="btn btn-danger">Delete</a></td>
-		        </tr>
-		      <?php 
-							endforeach;
-							?>
+		            <tbody id="course-data">
 		            </tbody>
 		            <tfoot>
 		            <tr>
-
 		            </tr>
 		            </tfoot>
 		          </table>
@@ -685,5 +671,6 @@ $coursesList = Course::all();
 		    $('table').DataTable();
 		});
 		</script>
+		<script src="templates/js/code.js"></script>
 	</body>
 </html>
