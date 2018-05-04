@@ -43,15 +43,66 @@ function getAllCourses(url) {
 	});
 }
 
-$(document).on('click', '.del', function() {
-	event.preventDefault();
-	var id = $(".del").attr('id');
+
+$(document).on('submit', '#form-update', function(e){
+	e.preventDefault();
+	var formData = $("#form-update").serialize();
+	// var formData = new FormData($("#form-update"));
+	// var formData = {
+ //            'id'              : $('input[name=id]').val(),
+ //            'full_name'             : $('input[name=full_name]').val(),
+ //            'username'             : $('input[name=username]').val(),
+ //            'email'             : $('input[name=email]').val(),
+ //            'password'             : $('input[name=password]').val(),
+ //            're_password'             : $('input[name=re_password]').val()
+ //        }; 
+	console.log(formData);
 	$.ajax({
-		url: pageUrl(),
+		url: url,
+		type: 'POST',
+        data: formData,
+		contentType: false,
+		processData: false,
+		success:function (data) {
+			url = pageUrl();
+			getAllCourses(url);
+			getAllUsers(url);
+		}
+	});
+	
+});
+
+
+
+$(document).on('click', '.edit', function() {
+	var id = $(this).attr('id');
+	console.log(id);
+	$.ajax({
+		url: url,
+		type: 'POST',
+		data: {edit: id},
+		success:function (data) {	
+			$('#edit-or-add').html(data);
+		}
+
+	});
+}); 
+
+
+$(document).on('click', '.del', function() {
+	var id = $(this).attr('id');
+	$.ajax({
+		url: url,
 		type: 'POST',
 		data: {del: id},
-		success:function (data) {
-			alert(data);
+		success:function (data) {	
+			var username = $(".user-name").attr('id');
+			swal({
+			  type: 'success',
+			  title: username + ' have been deleted successfully!',
+			  showConfirmButton: false,
+			  timer: 2000
+			});
 			url = pageUrl();
 			getAllCourses(url);
 			getAllUsers(url);
