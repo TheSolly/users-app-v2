@@ -46,8 +46,8 @@ function getAllCourses(url) {
 
 $(document).on('submit', '#form-update', function(e){
 	e.preventDefault();
-	var formData = $("#form-update").serialize();
-	// var formData = new FormData($("#form-update"));
+	// var formData = $("#form-update").serialize();
+	var formData = new FormData(this);
 	// var formData = {
  //            'id'              : $('input[name=id]').val(),
  //            'full_name'             : $('input[name=full_name]').val(),
@@ -64,6 +64,8 @@ $(document).on('submit', '#form-update', function(e){
 		contentType: false,
 		processData: false,
 		success:function (data) {
+			$("#form-update").remove();
+			$('.add-new').show();
 			url = pageUrl();
 			getAllCourses(url);
 			getAllUsers(url);
@@ -82,7 +84,8 @@ $(document).on('click', '.edit', function() {
 		type: 'POST',
 		data: {edit: id},
 		success:function (data) {	
-			$('#edit-or-add').html(data);
+			$('#edit-or-add').append(data);
+			$('.add-new').hide();
 		}
 
 	});

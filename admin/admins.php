@@ -313,7 +313,7 @@ $type = ADMINS;
 		        </div>
 		        <div class="row">
 		          <div id="edit-or-add" class="col-xs-8 col-xs-offset-2">
-		          	<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#add-new">
+		          	<button type="button" class="btn btn-success btn-block add-new" data-toggle="modal" data-target="#add-new">
 		          	  ADD NEW
 		          	</button>
 		          </div>
